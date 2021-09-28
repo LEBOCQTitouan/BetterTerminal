@@ -139,4 +139,19 @@ void clearFromCursor(direction direction);
  */
 void clearLine(direction direction);
 
+/**
+ * The makeCursorVisible() function will show the cursor in the terminal.
+ */
+void makeCursorVisible();
+
+/**
+ * The makeCurrsorInvisible() function will hide the cursor from the terminal.
+ */
+void makeCursorInvisible();
+
+/**
+ * The printfColoredRGB() function
+ */
+int printfColoredRGB(int fontR, int fontG, int fontB, int backgroundR, int backgroundG, int backgroundB, const char * format, ...);
+
 #endif // BETTER_TERMINAL_H

@@ -135,3 +135,34 @@ void clearLine(direction direction) {
     default: break;
     }
 }
+
+void makeCursorVisible() {
+    printf("\033[?25h");
+}
+
+void makeCursorInvisible() {
+    printf("\033[?25l");
+}
+
+int printfColoredRGB(int fontR, int fontG, int fontB, int backgroundR, int backgroundG, int backgroundB, const char * format, ...){
+    va_list argList;
+    int returnValue;
+
+    // char * ansiFontColorStr = getANSIColorValue(fontColor),
+    //      * ansiBgColorStr   = getANSIBgColorValue(bgColor),
+    // char * ansiStyle = getANSIStyleValue(style);
+
+    // if (ansiFontColorStr == NULL || ansiBgColorStr == NULL) { return -1; } // ERROR in the colors
+    // printf("\033[%s;%s;%sm", ansiStyle, ansiFontColorStr, ansiBgColorStr); // setting the color
+
+    printf("\033[38;2;%d;%d;%dm", fontR, fontG, fontB);
+    printf("\033[48;2;%d;%d;%dm", backgroundR, backgroundG, backgroundB);
+    // printf("\033[%sm", getANSIStyleValue);
+
+    va_start(argList, format);
+    returnValue = vprintf(format, argList);
+    va_end(argList);
+
+    printf("\033[0m"); // reset of the color
+    return returnValue;
+}
