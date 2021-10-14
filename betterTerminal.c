@@ -2,6 +2,8 @@
 #include "betterTerminal.h"
 // end header file
 
+bool needReset = false;
+
 char * getANSIColorValue(color color) {
     switch (color)
     {
@@ -138,10 +140,15 @@ void clearLine(direction direction) {
 
 void makeCursorVisible() {
     printf("\033[?25h");
+    needReset = false;
 }
 
 void makeCursorInvisible() {
     printf("\033[?25l");
+    if (!needReset) {
+        atexit(&makeCursorVisible);
+        needReset = true;
+    }
 }
 
 int printfColoredRGB(int fontR, int fontG, int fontB, int backgroundR, int backgroundG, int backgroundB, const char * format, ...){
