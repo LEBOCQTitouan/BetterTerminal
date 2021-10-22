@@ -154,4 +154,6 @@ void makeCursorInvisible();
  */
 int printfColoredRGB(int fontR, int fontG, int fontB, int backgroundR, int backgroundG, int backgroundB, const char * format, ...);
 
+void clearLineN(int line);
+
 #endif // BETTER_TERMINAL_H

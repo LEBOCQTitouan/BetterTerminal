@@ -173,3 +173,8 @@ int printfColoredRGB(int fontR, int fontG, int fontB, int backgroundR, int backg
     printf("\033[0m"); // reset of the color
     return returnValue;
 }
+
+void clearLineN(int line) {
+    moveCursor(line, 0);
+    printf("\033K");
+}
