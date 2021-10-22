@@ -98,7 +98,7 @@ void moveCursorRelative(direction direction, int iterationNumber) {
 }
 
 void clearAllTerminal() {
-    printf("\033[2J");
+    printf("\033[2J\n");
 }
 
 void moveCursorOnStartRelative(int lines) {
@@ -117,10 +117,10 @@ void clearFromCursor(direction direction) {
     switch (direction)
     {
     case CURSOR_UP:
-        printf("\033[1J");
+        printf("\033[1J\n");
         break;
     case CURSOR_DOWN:
-        printf("\033[0J");
+        printf("\033[0J\n");
         break;
     default: break;
     }
@@ -130,9 +130,9 @@ void clearLine(direction direction) {
     switch (direction)
     {
     case CURSOR_LEFT:
-        printf("\033[1K");
+        printf("\033[1K\n");
     case CURSOR_RIGHT:
-        printf("\033[0K");
+        printf("\033[0K\n");
         break;
     default: break;
     }
@@ -155,16 +155,8 @@ int printfColoredRGB(int fontR, int fontG, int fontB, int backgroundR, int backg
     va_list argList;
     int returnValue;
 
-    // char * ansiFontColorStr = getANSIColorValue(fontColor),
-    //      * ansiBgColorStr   = getANSIBgColorValue(bgColor),
-    // char * ansiStyle = getANSIStyleValue(style);
-
-    // if (ansiFontColorStr == NULL || ansiBgColorStr == NULL) { return -1; } // ERROR in the colors
-    // printf("\033[%s;%s;%sm", ansiStyle, ansiFontColorStr, ansiBgColorStr); // setting the color
-
     printf("\033[38;2;%d;%d;%dm", fontR, fontG, fontB);
     printf("\033[48;2;%d;%d;%dm", backgroundR, backgroundG, backgroundB);
-    // printf("\033[%sm", getANSIStyleValue);
 
     va_start(argList, format);
     returnValue = vprintf(format, argList);
@@ -176,5 +168,5 @@ int printfColoredRGB(int fontR, int fontG, int fontB, int backgroundR, int backg
 
 void clearLineN(int line) {
     moveCursor(line, 0);
-    printf("\033K");
+    printf("\033[K\n");
 }
